@@ -8,6 +8,30 @@
 import Foundation
 import SwiftData
 
+let assetNames: [String: String] = [
+    "고등어": "gray",
+    "깜냥이1": "black1",
+    "깜냥이2": "black2",
+    "깜냥이3": "black3",
+    "노벨이": "nobel",
+    "다크초코": "brown2",
+    "삼색이": "samsec",
+    "인절미": "injeolmi",
+    "치즈스틱": "cheesestick",
+]
+
+let fadedAssetNames: [String: String] = [
+    "고등어_0": "gray_faded",
+    "깜냥이1_0": "black1_faded",
+    "깜냥이2_0": "black2_faded",
+    "깜냥이3_0": "black3_faded",
+    "노벨이_0": "nobel_faded",
+    "다크초코_0": "brown2_faded",
+    "삼색이_0": "samsec_faded",
+    "인절미_0": "injeolmi_faded",
+    "치즈스틱_0": "cheesestick_faded",
+]
+
 @Model
 class Cat {
     let name: String
@@ -23,7 +47,15 @@ class Cat {
         default: return name
         }
     }
-    
+
+    var assetName: String {
+        assetNames[name] ?? "nyan"
+    }
+
+    var fadedAssetName: String {
+        fadedAssetNames[name_0] ?? "nyan"
+    }
+
     init(name: String, name_0: String, meetCount: Int, index: Int) {
         self.name = name
         self.name_0 = name_0

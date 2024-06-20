@@ -47,10 +47,10 @@ struct PoCatCatalogueView: View {
                             
                             VStack{
                                 if cats[0].meetCount == 1 {
-                                    Image(cats[0].name_0).resizable()
+                                    Image(cats[0].fadedAssetName).resizable()
                                         .frame(width: 100, height: 100)
                                 } else {
-                                    Image(cats[0].name).resizable()
+                                    Image(cats[0].assetName).resizable()
                                         .frame(width: 100, height: 100)
                                 }
                                 Text(cats[0].realName)
@@ -70,10 +70,10 @@ struct PoCatCatalogueView: View {
                                 ForEach(1..<9) { n in
                                     VStack{
                                         if cats[n].meetCount == 1 {
-                                            Image(cats[n].name_0).resizable()
+                                            Image(cats[n].fadedAssetName).resizable()
                                                 .frame(width: 100, height: 100)
                                         } else {
-                                            Image(cats[n].name).resizable()
+                                            Image(cats[n].assetName).resizable()
                                                 .frame(width: 100, height: 100)
                                         }
                                         Text(cats[n].realName)

@@ -163,7 +163,7 @@ struct NewCameraView: View {
                 }
                 .padding(20)
                 Spacer()
-                Image(cat.name)
+                Image(cat.assetName)
                     .resizable()
                     .frame(width: 110, height: 110)
                     .padding(.vertical, 15)
