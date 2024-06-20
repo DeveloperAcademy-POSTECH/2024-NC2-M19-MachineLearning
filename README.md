@@ -22,7 +22,7 @@
 > Create ML에서 Image Classification 템플릿을 활용하여 직접 AI 모델을 만들고, Vision 프레임워크인 VNCoreMLContainer를 활용하여 직접 만든 ML 모델을 앱에 적용한다. <br/>
 
 ## 💼 Use Case
-> **😽 사진을 기반으로 포스텍 고양이들의 이름을 검색하고 수집하자!** <br/>
+> **😽 포스텍 고양이들을 구분하고 만난 고양이들을 기록하자!** <br/>
 
 ## 🖼️ Prototype
 
