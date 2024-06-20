@@ -28,7 +28,7 @@
 
 <img width="1247" alt="prototype" src="https://github.com/DeveloperAcademy-POSTECH/2024-NC2-M19-MachineLearning/assets/156973592/57015213-4537-427f-b256-4228af19cd7e">
 
-[RPReplay_Final1718841098.MP4](https://prod-files-secure.s3.us-west-2.amazonaws.com/2e999faf-43aa-426e-ba81-0a9f876c0c58/669ae909-aed9-494d-877e-bd511374bf7e/RPReplay_Final1718841098.mp4)
+[영상보기](https://prod-files-secure.s3.us-west-2.amazonaws.com/2e999faf-43aa-426e-ba81-0a9f876c0c58/669ae909-aed9-494d-877e-bd511374bf7e/RPReplay_Final1718841098.mp4)
 <br/>
 
 ## 🛠️ About Code
