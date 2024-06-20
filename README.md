@@ -9,8 +9,7 @@
 > * **Core ML** : AI 모델을 Apple 디바이스와 쉽게 통합할 수 있게 하는 강력한 프레임워크
 > * **Create ML** : 코드작성 없이도, 원하는 AI 모델을 쉽게 만들어주는 도구
 > 
-> 
-> ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/2e999faf-43aa-426e-ba81-0a9f876c0c58/1dd0e74c-cde2-4a21-b10d-51dc488c49a4/Untitled.png)
+> <img width="1841" alt="ML소개" src="https://github.com/DeveloperAcademy-POSTECH/2024-NC2-M19-MachineLearning/assets/156973592/0f461bb5-d45d-4cfc-ae17-6bdededda83b">
 > 
 > * ML의 **4가지 분류**
 > 
@@ -28,13 +27,57 @@
 
 ## 💼 Use Case
 
-> 😽 사진을 기반으로 포스텍 고양이들의 이름을 검색하고 수집하자!
+<aside>
+😽 사진을 기반으로 포스텍 고양이들의 이름을 검색하고 수집하자!
 
+</aside>
 
 ## 🖼️ Prototype
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/2e999faf-43aa-426e-ba81-0a9f876c0c58/74c3c8db-6e69-41a5-ac2f-c46f2176b1ca/Untitled.png)
+<img width="1247" alt="prototype" src="https://github.com/DeveloperAcademy-POSTECH/2024-NC2-M19-MachineLearning/assets/156973592/57015213-4537-427f-b256-4228af19cd7e">
 
 [RPReplay_Final1718841098.MP4](https://prod-files-secure.s3.us-west-2.amazonaws.com/2e999faf-43aa-426e-ba81-0a9f876c0c58/669ae909-aed9-494d-877e-bd511374bf7e/RPReplay_Final1718841098.mp4)
 
 ## 🛠️ About Code
+```swift
+import Vision
+
+extension MosuDataModel {
+    func detect(image: CIImage, completion: @escaping (String) -> Void) {
+        // CoreML의 모델로 사용할 PocatClassifier2를 coreMLModel 객체로 생성 후,
+        // Vision 프레임워크인 VNCoreMLModel 컨테이너를 사용하여 CoreML의 model에 접근한다.
+        guard let coreMLModel = try? PocatClassifier2(configuration: MLModelConfiguration()),
+              let visionModel = try? VNCoreMLModel(for: coreMLModel.model) else {
+            fatalError("Loading CoreML Model Failed")
+        }
+        // Vision을 이용해 이미치 처리를 요청
+        let request = VNCoreMLRequest(model: visionModel) { request, error in
+            guard error == nil else {
+                fatalError("Failed Request")
+            }
+            // 식별자의 이름(고양이 이름)을 확인하기 위해 VNClassificationObservation로 변환해준다.
+            guard let classification = request.results as? [VNClassificationObservation] else {
+                fatalError("Faild convert VNClassificationObservation")
+            }
+            // 머신러닝을 통한 결과값 프린트
+            print(classification)
+            if let firstItem = classification.first { // 가장 확률이 높은 결과를 firstItem에 저장
+                print(firstItem.identifier.capitalized)
+                var result = firstItem.identifier.capitalized
+                result += " "
+                result += firstItem.confidence.formatted()
+                completion(firstItem.identifier.capitalized)
+            } else {
+                completion("못찾음 ㅠ")
+            }
+        }
+        // 이미지를 받아와서 perform을 요청하여 분석한다. (Vision 프레임워크)
+        let handler = VNImageRequestHandler(ciImage: image)
+        do {
+            try handler.perform([request])
+        } catch {
+            print(error)
+        }
+    }
+}
+```
