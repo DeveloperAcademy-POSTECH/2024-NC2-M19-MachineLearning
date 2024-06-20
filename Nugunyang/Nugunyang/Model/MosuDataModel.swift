@@ -42,7 +42,7 @@ final class MosuDataModel: ObservableObject {
         Task {
             await handleCameraPreviews()
         }
-
+//
         Task {
             await handleCameraPhotos()
         }
@@ -68,7 +68,7 @@ final class MosuDataModel: ObservableObject {
             Task { @MainActor in
                 thumbnailImage = photoData.thumbnailImage
             }
-            savePhoto(imageData: photoData.imageData)
+            detectPhoto(imageData: photoData.imageData)
         }
     }
 
@@ -89,19 +89,13 @@ final class MosuDataModel: ObservableObject {
         return PhotoData(thumbnailImage: thumbnailImage, thumbnailSize: thumbnailSize, imageData: imageData, imageSize: imageSize)
     }
 
-    func savePhoto(imageData: Data) {
-        Task {
-//            do {
-//                try await photoCollection.addImage(imageData)
-                if let ciImage = CIImage(data: imageData) {
-                    detect(image: ciImage) { [weak self] result in
-                        self?.resultString = result
-                    }
+    func detectPhoto(imageData: Data) {
+        if let ciImage = CIImage(data: imageData) {
+            detect(image: ciImage) { [weak self] result in
+                DispatchQueue.main.async {
+                    self?.resultString = result
                 }
-                logger.debug("Added image data to photo collection.")
-//            } catch let error {
-//                logger.error("Failed to add image to photo collection: \(error.localizedDescription)")
-//            }
+            }
         }
     }
 }
